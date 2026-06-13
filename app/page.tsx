@@ -4,8 +4,13 @@ import { BottomNav } from "@/components/bottom-nav"
 import { AnomalyMap } from "@/components/anomaly-map"
 import { getEvents } from "@/lib/events"
 
-export default async function MapPage() {
+export default async function MapPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ focus?: string }>
+}) {
   const events = await getEvents()
+  const { focus } = await searchParams
 
   return (
     <PhoneShell>
@@ -66,7 +71,7 @@ export default async function MapPage() {
 
         {/* map */}
         <div className="relative flex-1 overflow-hidden">
-          <AnomalyMap events={events} />
+          <AnomalyMap events={events} focusId={focus} />
         </div>
       </div>
 

@@ -9,7 +9,6 @@ import {
   Activity,
   Info,
   Map,
-  MessageCircle,
 } from "lucide-react"
 import { PhoneShell, StatusBar } from "@/components/phone-shell"
 import { EventMiniMap } from "@/components/event-mini-map"
@@ -87,20 +86,13 @@ export default async function EventDetailPage({
 
         {/* actions */}
         <div className="mt-4 flex flex-col gap-3">
-          <button
-            type="button"
+          <Link
+            href={`/?focus=${event.id}`}
             className="flex items-center justify-center gap-2 rounded-xl bg-primary py-3.5 text-sm font-semibold text-primary-foreground shadow-sm transition-opacity hover:opacity-90"
           >
             <Map className="h-5 w-5" />
             Xem trên bản đồ
-          </button>
-          <button
-            type="button"
-            className="flex items-center justify-center gap-2 rounded-xl border border-primary bg-card py-3.5 text-sm font-semibold text-primary transition-colors hover:bg-accent"
-          >
-            <MessageCircle className="h-5 w-5" />
-            Gửi phản hồi
-          </button>
+          </Link>
         </div>
       </div>
     </PhoneShell>
