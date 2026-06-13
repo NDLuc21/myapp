@@ -12,6 +12,12 @@ export default async function MapPage({
   const events = await getEvents()
   const { focus } = await searchParams
 
+  // Ngày hiện tại theo giờ Việt Nam (DD/MM/YYYY) — khớp với event.date
+  const today = new Date().toLocaleDateString("vi-VN", {
+    timeZone: "Asia/Ho_Chi_Minh",
+  })
+  const todayCount = events.filter((e) => e.date === today).length
+
   return (
     <PhoneShell>
       <StatusBar />
@@ -35,7 +41,7 @@ export default async function MapPage({
               <div className="pr-3">
                 <p className="text-xs text-muted-foreground">Tổng điểm bất thường</p>
                 <div className="mt-1 flex items-baseline gap-1.5">
-                  <span className="text-2xl font-bold text-destructive">{events.length}</span>
+                  <span className="text-2xl font-bold text-destructive">{todayCount}</span>
                   <span className="flex items-center gap-1 text-xs text-muted-foreground">
                     <span className="h-1.5 w-1.5 rounded-full bg-destructive" />
                     Hôm nay
@@ -57,7 +63,7 @@ export default async function MapPage({
                   type="button"
                   className="mt-1 flex items-center gap-1 text-sm font-semibold text-foreground"
                 >
-                  20/05/2024
+                  {today}
                   <Calendar className="h-4 w-4 text-muted-foreground" />
                 </button>
               </div>
